@@ -2,27 +2,10 @@
 
 namespace Queestion1
 {
-    /*
-     * 2 класса Ping и Pong
-    один уведомляет другого, о том, что "произошёл пинг", другой - о том, что "произошёл понг",
-    одна пара объектов "играют" между собой, другая пара - между собой и т.д.
-    и выводить на консоль соответсвующие сообщения, что-то вроди такого:
-
-    Ping received Pong.
-    Pong received Ping.
-    Ping received Pong.
-    Pong received Ping.
-    Ping received Pong*/
-
     class Ping
     {
         public delegate void PingShoot(string message);
         public event PingShoot Notify;
-
-        public Ping()
-        {
-            
-        }
 
         public void Shoot()
         {
@@ -35,11 +18,6 @@ namespace Queestion1
         public delegate void PongShoot(string message);
         public event PongShoot Notify;
 
-        public Pong()
-        {
-
-        }
-
         public void Shoot()
         {
             Notify?.Invoke("Ping received Pong.");
@@ -48,12 +26,7 @@ namespace Queestion1
 
     class Program
     {
-        public static bool checkerName;
-
-        static void ShottersMessage(string mes)
-        {
-            Console.WriteLine(mes);
-        }
+        public static bool checkerPingPong;
 
         public static string ChoiceChecker()
         {
@@ -68,19 +41,24 @@ namespace Queestion1
 
                     if (!Char.IsLetter(element))
                     {
-                        checkerName = false;
+                        checkerPingPong = false;
                         Console.Write("Incorrect name type, please enter correct name: ");
                         break;
                     }
                     else
                     {
-                        checkerName = true;
+                        checkerPingPong = true;
                     }
                 }
             }
-            while (checkerName == false);
+            while (checkerPingPong == false);
 
             return pingPong;
+        }
+
+        public static void ShottersMessage(string mes)
+        {
+            Console.WriteLine(mes);
         }
 
         static void Main(string[] args)
@@ -94,6 +72,7 @@ namespace Queestion1
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.Write("Enter which you want shoot(type ping or pong): ");
                 Console.ResetColor();
+
                 string choice = ChoiceChecker();
 
                 switch (choice)
@@ -101,28 +80,32 @@ namespace Queestion1
                     case "ping":
                         {
                             Console.ForegroundColor = ConsoleColor.Red;
+
                             Ping ping = new Ping();
                             ping.Notify += ShottersMessage;
                             ping.Shoot();
+
                             Console.ResetColor();
 
                             Console.ForegroundColor = ConsoleColor.Yellow;
                             Console.Write("Would you try again ? (Y/y) or (N/n): ");
                             do
                             {
-                                string otvet = ChoiceChecker();
-                                switch (otvet)
+                                string continueYesOrNo = ChoiceChecker();
+                                switch (continueYesOrNo)
                                 {
                                     case "Y":
                                         {
                                             mainDo = false;
                                             pingDo = true;
+                                            Console.ResetColor();
                                             break;
                                         }
                                     case "y":
                                         {
                                             mainDo = false;
                                             pingDo = true;
+                                            Console.ResetColor();
                                             break;
                                         }
                                     case "N":
@@ -152,9 +135,11 @@ namespace Queestion1
 
                             break;
                         }
+
                     case "pong":
                         {
-                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.ForegroundColor = ConsoleColor.DarkBlue;
+
                             Pong pong = new Pong();
                             pong.Notify += ShottersMessage;
                             pong.Shoot();
@@ -163,8 +148,8 @@ namespace Queestion1
                             Console.Write("Would you try again ? (Y/y) or (N/n): ");
                             do
                             {
-                                string otvet = ChoiceChecker();
-                                switch (otvet)
+                                string continueYesOrNo = ChoiceChecker();
+                                switch (continueYesOrNo)
                                 {
                                     case "Y":
                                         {
@@ -203,19 +188,18 @@ namespace Queestion1
                             }
                             while (pongDo == false);
 
-
                             break;
                         }
+
                     default:
                         {
                             Console.Write("Incorrect type\n");
                             mainDo = false;
+
                             break;
                         }
                 }
             } while (mainDo == false);
-
-            
 
             Console.ReadKey();
         }
