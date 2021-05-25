@@ -1,8 +1,8 @@
 ﻿<Properties StartupConfiguration="{FFEA346F-8B9D-4B8E-8B7C-416E758C5779}|Default">
-  <MonoDevelop.Ide.ItemProperties.Queestion1 FirstBuild="True" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.ItemProperties.Queestion1 PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Queestion1/Program.cs">
     <Files>
-      <File FileName="Queestion1/Program.cs" Line="9" Column="31" />
+      <File FileName="Queestion1/Program.cs" Line="37" Column="26" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
