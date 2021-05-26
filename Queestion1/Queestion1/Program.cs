@@ -61,11 +61,14 @@ namespace Queestion1
             Console.WriteLine(mes);
         }
 
+        public static int counter = 0;
+
         static void Main(string[] args)
         {
             bool pingDo;
             bool pongDo;
-            bool mainDo;
+            bool mainDo = true;
+
 
             do
             {
@@ -79,115 +82,132 @@ namespace Queestion1
                 {
                     case "ping":
                         {
-                            Console.ForegroundColor = ConsoleColor.Red;
 
-                            Ping ping = new Ping();
-                            ping.Notify += ShottersMessage;
-                            ping.Shoot();
-
-                            Console.ResetColor();
-
-                            Console.ForegroundColor = ConsoleColor.Yellow;
-                            Console.Write("Would you try again ? (Y/y) or (N/n): ");
-                            do
+                            if (counter == 0 || counter % 2 == 0)
                             {
-                                string continueYesOrNo = ChoiceChecker();
-                                switch (continueYesOrNo)
-                                {
-                                    case "Y":
-                                        {
-                                            mainDo = false;
-                                            pingDo = true;
-                                            Console.ResetColor();
-                                            break;
-                                        }
-                                    case "y":
-                                        {
-                                            mainDo = false;
-                                            pingDo = true;
-                                            Console.ResetColor();
-                                            break;
-                                        }
-                                    case "N":
-                                        {
-                                            Console.WriteLine("Have a good day :)");
-                                            mainDo = true;
-                                            pingDo = true;
-                                            break;
-                                        }
-                                    case "n":
-                                        {
-                                            Console.WriteLine("Have a good day :)");
-                                            mainDo = true;
-                                            pingDo = true;
-                                            break;
-                                        }
-                                    default:
-                                        {
-                                            Console.Write("You enter incorrect symbol, please enter Y/y or N/n: ");
-                                            mainDo = false;
-                                            pingDo = false;
-                                            continue;
-                                        }
-                                }
-                            }
-                            while (pingDo == false);
+                                Console.ForegroundColor = ConsoleColor.Red;
 
+                                Ping ping = new Ping();
+                                ping.Notify += ShottersMessage;
+                                ping.Shoot();
+
+                                Console.ResetColor();
+                                Console.ForegroundColor = ConsoleColor.Yellow;
+                                Console.Write("Would you try again ? (Y/y) or (N/n): ");
+                                do
+                                {
+                                    string continueYesOrNo = ChoiceChecker();
+                                    switch (continueYesOrNo)
+                                    {
+                                        case "Y":
+                                            {
+                                                mainDo = false;
+                                                pingDo = true;
+                                                counter++;
+                                                Console.ResetColor();
+                                                break;
+                                            }
+                                        case "y":
+                                            {
+                                                mainDo = false;
+                                                pingDo = true;
+                                                counter++;
+                                                Console.ResetColor();
+                                                break;
+                                            }
+                                        case "N":
+                                            {
+                                                Console.WriteLine("Have a good day :)");
+                                                mainDo = true;
+                                                pingDo = true;
+                                                break;
+                                            }
+                                        case "n":
+                                            {
+                                                Console.WriteLine("Have a good day :)");
+                                                mainDo = true;
+                                                pingDo = true;
+                                                break;
+                                            }
+                                        default:
+                                            {
+                                                Console.Write("You enter incorrect symbol, please enter Y/y or N/n: ");
+                                                mainDo = false;
+                                                pingDo = false;
+                                                continue;
+                                            }
+                                    }
+                                }while (pingDo == false);
+                            }
+                            else
+                            {
+                                Console.WriteLine("Ping can't shoot, right now Pong turn");
+                                mainDo = false;
+                            }
                             break;
                         }
 
                     case "pong":
                         {
-                            Console.ForegroundColor = ConsoleColor.DarkBlue;
-
-                            Pong pong = new Pong();
-                            pong.Notify += ShottersMessage;
-                            pong.Shoot();
-
-                            Console.ForegroundColor = ConsoleColor.Yellow;
-                            Console.Write("Would you try again ? (Y/y) or (N/n): ");
-                            do
+                            if (counter == 0 || counter % 2 != 0)
                             {
-                                string continueYesOrNo = ChoiceChecker();
-                                switch (continueYesOrNo)
-                                {
-                                    case "Y":
-                                        {
-                                            mainDo = false;
-                                            pongDo = true;
-                                            break;
-                                        }
-                                    case "y":
-                                        {
-                                            mainDo = false;
-                                            pongDo = true;
-                                            break;
-                                        }
-                                    case "N":
-                                        {
-                                            Console.WriteLine("Have a good day :)");
-                                            mainDo = true;
-                                            pongDo = true;
-                                            break;
-                                        }
-                                    case "n":
-                                        {
-                                            Console.WriteLine("Have a good day :)");
-                                            mainDo = true;
-                                            pongDo = true;
-                                            break;
-                                        }
-                                    default:
-                                        {
-                                            Console.Write("You enter incorrect symbol, please enter Y/y or N/n: ");
-                                            mainDo = false;
-                                            pongDo = false;
-                                            continue;
-                                        }
-                                }
-                            }
-                            while (pongDo == false);
+                                Console.ForegroundColor = ConsoleColor.DarkBlue;
 
+                                Pong pong = new Pong();
+                                pong.Notify += ShottersMessage;
+                                pong.Shoot();
+
+                                Console.ForegroundColor = ConsoleColor.Yellow;
+                                Console.Write("Would you try again ? (Y/y) or (N/n): ");
+                                do
+                                {
+                                    string continueYesOrNo = ChoiceChecker();
+                                    switch (continueYesOrNo)
+                                    {
+                                        case "Y":
+                                            {
+                                                mainDo = false;
+                                                pongDo = true;
+                                                counter++;
+                                                break;
+                                            }
+                                        case "y":
+                                            {
+                                                mainDo = false;
+                                                pongDo = true;
+                                                counter++;
+                                                break;
+                                            }
+                                        case "N":
+                                            {
+                                                Console.WriteLine("Have a good day :)");
+                                                mainDo = true;
+                                                pongDo = true;
+                                                break;
+                                            }
+                                        case "n":
+                                            {
+                                                Console.WriteLine("Have a good day :)");
+                                                mainDo = true;
+                                                pongDo = true;
+                                                break;
+                                            }
+                                        default:
+                                            {
+                                                Console.Write("You enter incorrect symbol, please enter Y/y or N/n: ");
+                                                mainDo = false;
+                                                pongDo = false;
+                                                continue;
+                                            }
+                                    }
+                                }
+                                while (pongDo == false);
+                            }
+                            else
+                            {
+                                Console.WriteLine("Pong can't shoot, right now Ping turn");
+                                mainDo = false;
+                            }
                             break;
                         }
 
