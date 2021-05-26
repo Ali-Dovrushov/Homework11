@@ -61,13 +61,15 @@ namespace Queestion1
             Console.WriteLine(mes);
         }
 
-        public static int counter = 0;
+        public static int counterPing;
+        public static int counterPong;
+
 
         static void Main(string[] args)
         {
             bool pingDo;
             bool pongDo;
-            bool mainDo = true;
+            bool mainDo;
 
 
             do
@@ -83,16 +85,17 @@ namespace Queestion1
                     case "ping":
                         {
 
-                            if (counter == 0 || counter % 2 == 0)
+                            if (counterPing == 0)
                             {
                                 Console.ForegroundColor = ConsoleColor.Red;
 
                                 Ping ping = new Ping();
                                 ping.Notify += ShottersMessage;
                                 ping.Shoot();
+                                Console.Beep(500, 250);
 
                                 Console.ResetColor();
-                                Console.ForegroundColor = ConsoleColor.Yellow;
+                                Console.ForegroundColor = ConsoleColor.Green;
                                 Console.Write("Would you try again ? (Y/y) or (N/n): ");
                                 do
                                 {
@@ -103,16 +106,18 @@ namespace Queestion1
                                             {
                                                 mainDo = false;
                                                 pingDo = true;
-                                                counter++;
-                                                Console.ResetColor();
+                                                counterPing++;
+                                                counterPong = 0;
+
                                                 break;
                                             }
                                         case "y":
                                             {
                                                 mainDo = false;
                                                 pingDo = true;
-                                                counter++;
-                                                Console.ResetColor();
+                                                counterPing++;
+                                                counterPong = 0;
+
                                                 break;
                                             }
                                         case "N":
@@ -120,6 +125,7 @@ namespace Queestion1
                                                 Console.WriteLine("Have a good day :)");
                                                 mainDo = true;
                                                 pingDo = true;
+
                                                 break;
                                             }
                                         case "n":
@@ -127,6 +133,7 @@ namespace Queestion1
                                                 Console.WriteLine("Have a good day :)");
                                                 mainDo = true;
                                                 pingDo = true;
+
                                                 break;
                                             }
                                         default:
@@ -134,10 +141,11 @@ namespace Queestion1
                                                 Console.Write("You enter incorrect symbol, please enter Y/y or N/n: ");
                                                 mainDo = false;
                                                 pingDo = false;
+
                                                 continue;
                                             }
                                     }
-                                }while (pingDo == false);
+                                } while (pingDo == false);
                             }
                             else
                             {
@@ -149,15 +157,17 @@ namespace Queestion1
 
                     case "pong":
                         {
-                            if (counter == 0 || counter % 2 != 0)
+                            if (counterPong == 0)
                             {
                                 Console.ForegroundColor = ConsoleColor.DarkBlue;
 
                                 Pong pong = new Pong();
                                 pong.Notify += ShottersMessage;
                                 pong.Shoot();
+                                Console.Beep(1000, 250);
 
-                                Console.ForegroundColor = ConsoleColor.Yellow;
+                                Console.ResetColor();
+                                Console.ForegroundColor = ConsoleColor.Green;
                                 Console.Write("Would you try again ? (Y/y) or (N/n): ");
                                 do
                                 {
@@ -168,14 +178,18 @@ namespace Queestion1
                                             {
                                                 mainDo = false;
                                                 pongDo = true;
-                                                counter++;
+                                                counterPong++;
+                                                counterPing = 0;
+
                                                 break;
                                             }
                                         case "y":
                                             {
                                                 mainDo = false;
                                                 pongDo = true;
-                                                counter++;
+                                                counterPong++;
+                                                counterPing = 0;
+
                                                 break;
                                             }
                                         case "N":
@@ -183,6 +197,7 @@ namespace Queestion1
                                                 Console.WriteLine("Have a good day :)");
                                                 mainDo = true;
                                                 pongDo = true;
+
                                                 break;
                                             }
                                         case "n":
@@ -190,6 +205,7 @@ namespace Queestion1
                                                 Console.WriteLine("Have a good day :)");
                                                 mainDo = true;
                                                 pongDo = true;
+
                                                 break;
                                             }
                                         default:
@@ -197,6 +213,7 @@ namespace Queestion1
                                                 Console.Write("You enter incorrect symbol, please enter Y/y or N/n: ");
                                                 mainDo = false;
                                                 pongDo = false;
+
                                                 continue;
                                             }
                                     }
